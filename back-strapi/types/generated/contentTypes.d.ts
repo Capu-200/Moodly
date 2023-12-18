@@ -677,6 +677,68 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiMoodMood extends Schema.CollectionType {
+  collectionName: 'moods';
+  info: {
+    singularName: 'mood';
+    pluralName: 'moods';
+    displayName: 'Mood';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nom: Attribute.String;
+    Emoji: Attribute.Media;
+    Couleur: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::mood.mood', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::mood.mood', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiUtilisateurUtilisateur extends Schema.CollectionType {
+  collectionName: 'utilisateurs';
+  info: {
+    singularName: 'utilisateur';
+    pluralName: 'utilisateurs';
+    displayName: 'Utilisateur';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Nom: Attribute.String;
+    Prenom: Attribute.String;
+    Email: Attribute.Email;
+    Password: Attribute.Password;
+    mood: Attribute.Relation<
+      'api::utilisateur.utilisateur',
+      'oneToOne',
+      'api::mood.mood'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::utilisateur.utilisateur',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::utilisateur.utilisateur',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -693,6 +755,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::mood.mood': ApiMoodMood;
+      'api::utilisateur.utilisateur': ApiUtilisateurUtilisateur;
     }
   }
 }
