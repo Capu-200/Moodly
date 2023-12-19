@@ -737,6 +737,7 @@ export interface ApiUtilisateurUtilisateur extends Schema.CollectionType {
     singularName: 'utilisateur';
     pluralName: 'utilisateurs';
     displayName: 'Utilisateur';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -750,6 +751,11 @@ export interface ApiUtilisateurUtilisateur extends Schema.CollectionType {
       'api::utilisateur.utilisateur',
       'oneToOne',
       'api::mood.mood'
+    >;
+    raisons: Attribute.Relation<
+      'api::utilisateur.utilisateur',
+      'oneToMany',
+      'api::raison.raison'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
