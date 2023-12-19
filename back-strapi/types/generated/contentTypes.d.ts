@@ -695,11 +695,6 @@ export interface ApiChoixChoix extends Schema.CollectionType {
       'oneToMany',
       'api::raison.raison'
     >;
-    employe: Attribute.Relation<
-      'api::choix.choix',
-      'oneToOne',
-      'api::employe.employe'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -711,82 +706,6 @@ export interface ApiChoixChoix extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::choix.choix',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiEmployeEmploye extends Schema.CollectionType {
-  collectionName: 'employes';
-  info: {
-    singularName: 'employe';
-    pluralName: 'employes';
-    displayName: 'Employ\u00E9';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Nom: Attribute.String;
-    Email: Attribute.Email;
-    Password: Attribute.Password;
-    Prenom: Attribute.String;
-    moods: Attribute.Relation<
-      'api::employe.employe',
-      'oneToMany',
-      'api::mood.mood'
-    >;
-    raisons: Attribute.Relation<
-      'api::employe.employe',
-      'oneToMany',
-      'api::raison.raison'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::employe.employe',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::employe.employe',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiManagerManager extends Schema.CollectionType {
-  collectionName: 'managers';
-  info: {
-    singularName: 'manager';
-    pluralName: 'managers';
-    displayName: 'Manager';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Nom: Attribute.String;
-    Prenom: Attribute.String;
-    Email: Attribute.Email;
-    Password: Attribute.Password;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::manager.manager',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::manager.manager',
       'oneToOne',
       'admin::user'
     > &
@@ -800,6 +719,7 @@ export interface ApiMoodMood extends Schema.CollectionType {
     singularName: 'mood';
     pluralName: 'moods';
     displayName: 'Mood';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -865,8 +785,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::choix.choix': ApiChoixChoix;
-      'api::employe.employe': ApiEmployeEmploye;
-      'api::manager.manager': ApiManagerManager;
       'api::mood.mood': ApiMoodMood;
       'api::raison.raison': ApiRaisonRaison;
     }
