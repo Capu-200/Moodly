@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "raisons",
+  "info": {
+    "singularName": "raison",
+    "pluralName": "raisons",
+    "displayName": "Raisons"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nom": {
+      "type": "string"
+    }
+  }
+}

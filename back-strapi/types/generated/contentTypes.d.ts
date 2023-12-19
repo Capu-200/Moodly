@@ -701,6 +701,36 @@ export interface ApiMoodMood extends Schema.CollectionType {
   };
 }
 
+export interface ApiRaisonRaison extends Schema.CollectionType {
+  collectionName: 'raisons';
+  info: {
+    singularName: 'raison';
+    pluralName: 'raisons';
+    displayName: 'Raisons';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Nom: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::raison.raison',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::raison.raison',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiUtilisateurUtilisateur extends Schema.CollectionType {
   collectionName: 'utilisateurs';
   info: {
@@ -756,6 +786,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::mood.mood': ApiMoodMood;
+      'api::raison.raison': ApiRaisonRaison;
       'api::utilisateur.utilisateur': ApiUtilisateurUtilisateur;
     }
   }
