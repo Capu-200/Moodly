@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Moodly_capacitor</string>
+    <string name="title_activity_main">Moodly_capacitor</string>
+    <string name="package_name">moodly.com</string>
+    <string name="custom_url_scheme">moodly.com</string>
+</resources>

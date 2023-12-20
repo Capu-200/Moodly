@@ -85,3 +85,38 @@ export default {
     }
 };
 </script>
+
+
+// ajout
+<template>
+    <div>
+      <h1>Données depuis Strapi</h1>
+      <ul>
+        <li v-for="item in strapiData" :key="item.id">{{ item.name }}</li>
+      </ul>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        strapiData: [],
+      };
+    },
+    mounted() {
+      this.fetchStrapiData();
+    },
+    methods: {
+      async fetchStrapiData() {
+        try {
+          const response = await fetch('https://votre-domaine-strapi.com/api/votre-endpoint');
+          const data = await response.json();
+          this.strapiData = data;
+        } catch (error) {
+          console.error('Erreur lors de la récupération des données depuis Strapi:', error);
+        }
+      },
+    },
+  };
+  </script>
