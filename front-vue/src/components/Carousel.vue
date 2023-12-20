@@ -1,6 +1,6 @@
 <template>
-    <div class="flex items-center justify-center h-full">
-        <button ref="prevBtn" class="text-black font-bold py-2 px-4 rounded">
+    <div class="flex items-center justify-center">
+        <button ref="prevBtn" class="text-black font-bold rounded">
             <img alt="left_arrow" src="@/assets/left_arrow.svg" width="30" height="30" />
         </button>
 
@@ -42,7 +42,7 @@
 
 
 
-        <button ref="nextBtn" class="text-black font-bold py-2 px-4 rounded">
+        <button ref="nextBtn" class="text-black font-bold rounded">
             <img alt="right_arrow" src="@/assets/right_arrow.svg" width="30" height="30" />
         </button>
     </div>
