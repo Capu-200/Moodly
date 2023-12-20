@@ -45,6 +45,7 @@
       },
       formatDataForTreeMap(data) {
         // Transformez les données de Strappi en un format compatible avec le TreeMap
+   
         return data.map(item => {
           return {
             name: item.nom, // Adaptez selon le format de vos données
