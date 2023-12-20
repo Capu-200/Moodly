@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "choixes",
+  "info": {
+    "singularName": "choix",
+    "pluralName": "choixes",
+    "displayName": "Choix",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Date": {
+      "type": "date"
+    },
+    "mood": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::mood.mood"
+    },
+    "raisons": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::raison.raison"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "choixes"
+    }
+  }
+}

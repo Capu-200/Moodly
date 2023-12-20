@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * utilisateur service
+ * choix service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::utilisateur.utilisateur');
+module.exports = createCoreService('api::choix.choix');
