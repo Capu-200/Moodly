@@ -5,14 +5,14 @@ import carousel  from '../components/Carousel.vue'
 
 <template>
 
-<div class="flex h-screen w-screen flex-1 flex-col justify-between px-6 py-12 lg:px-8 ">
+<div class="flex h-screen pt-10 pb-24 flex-1 flex-col justify-between ">
     
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <h1 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black">Quel est votre mood aujourd'hui ?</h1>
+  <div class="sm:mx-auto sm:max-w-sm">
+      <h1 class=" text-center text-2xl font-bold tracking-tight text-black">Quel est votre mood aujourd'hui ?</h1>
   </div>
 
 
-      <div class="flex items-center justify-center h-full">
+      <div class="flex items-center justify-center">
         <carousel />
       </div>
 

@@ -9,6 +9,11 @@ const router = createRouter({
       component: () => import('../views/Login.vue')
     },
     {
+      path: '/GraphManager',
+      name: 'GraphManager',
+      component: () => import('../views/GraphManager.vue')
+    },
+    {
       path: '/Mood',
       name: 'mood',
       component: () => import('../views/Mood.vue')
