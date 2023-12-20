@@ -362,6 +362,103 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiChoixChoix extends Schema.CollectionType {
+  collectionName: 'choixes';
+  info: {
+    singularName: 'choix';
+    pluralName: 'choixes';
+    displayName: 'Choix';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Date: Attribute.Date;
+    mood: Attribute.Relation<'api::choix.choix', 'oneToOne', 'api::mood.mood'>;
+    raisons: Attribute.Relation<
+      'api::choix.choix',
+      'oneToMany',
+      'api::raison.raison'
+    >;
+    users_permissions_user: Attribute.Relation<
+      'api::choix.choix',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::choix.choix',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::choix.choix',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMoodMood extends Schema.CollectionType {
+  collectionName: 'moods';
+  info: {
+    singularName: 'mood';
+    pluralName: 'moods';
+    displayName: 'Mood';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Nom: Attribute.String;
+    Couleur: Attribute.String;
+    Emoji: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::mood.mood', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::mood.mood', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRaisonRaison extends Schema.CollectionType {
+  collectionName: 'raisons';
+  info: {
+    singularName: 'raison';
+    pluralName: 'raisons';
+    displayName: 'Raison';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Nom: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::raison.raison',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::raison.raison',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -616,6 +713,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    choixes: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::choix.choix'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -677,97 +779,6 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiChoixChoix extends Schema.CollectionType {
-  collectionName: 'choixes';
-  info: {
-    singularName: 'choix';
-    pluralName: 'choixes';
-    displayName: 'Choix';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Date: Attribute.Date;
-    mood: Attribute.Relation<'api::choix.choix', 'oneToOne', 'api::mood.mood'>;
-    raisons: Attribute.Relation<
-      'api::choix.choix',
-      'oneToMany',
-      'api::raison.raison'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::choix.choix',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::choix.choix',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiMoodMood extends Schema.CollectionType {
-  collectionName: 'moods';
-  info: {
-    singularName: 'mood';
-    pluralName: 'moods';
-    displayName: 'Mood';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Nom: Attribute.String;
-    Couleur: Attribute.String;
-    Emoji: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::mood.mood', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::mood.mood', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiRaisonRaison extends Schema.CollectionType {
-  collectionName: 'raisons';
-  info: {
-    singularName: 'raison';
-    pluralName: 'raisons';
-    displayName: 'Raison';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Nom: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::raison.raison',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::raison.raison',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -778,15 +789,15 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::choix.choix': ApiChoixChoix;
+      'api::mood.mood': ApiMoodMood;
+      'api::raison.raison': ApiRaisonRaison;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::choix.choix': ApiChoixChoix;
-      'api::mood.mood': ApiMoodMood;
-      'api::raison.raison': ApiRaisonRaison;
     }
   }
 }
