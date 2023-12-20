@@ -13,6 +13,11 @@ const router = createRouter({
       name: 'mood',
       component: () => import('../views/Mood.vue')
     },
+    {
+      path: '/Dashboard',
+      name: 'dashboard',
+      component: () => import('../views/Dashboard.vue')
+    },
   ]
 })
 
