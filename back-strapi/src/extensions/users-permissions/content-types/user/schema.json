@@ -9,8 +9,7 @@
     "displayName": "User"
   },
   "options": {
-    "draftAndPublish": false,
-    "timestamps": true
+    "draftAndPublish": false
   },
   "attributes": {
     "username": {
@@ -71,6 +70,9 @@
       "relation": "oneToMany",
       "target": "api::choix.choix",
       "mappedBy": "users_permissions_user"
+    },
+    "Roles": {
+      "type": "string"
     }
   }
 }

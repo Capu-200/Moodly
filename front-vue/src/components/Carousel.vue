@@ -61,14 +61,41 @@ export default {
         <button ref="prevBtn" class="text-black font-bold rounded">
             <img alt="left_arrow" src="@/assets/left_arrow.svg" width="30" height="30" />
         </button>
-
         <div ref="emojiCarousel" class="overflow-hidden w-full h-full flex items-center justify-center">
-    <div class="flex transition-transform ease-linear duration-500" ref="carouselContainer">
+            <div class="flex transition-transform ease-linear duration-500" ref="carouselContainer">
 
-        <div class="flex flex-col flex-none w-full h-full items-center justify-center">
-            <img alt="Heureux" src="@/assets/happy_emoji.svg" width="125" height="125" />
-            <p class="text-center text-xl font-bold">Heureux</p>
+                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
+                    <img alt="Heureux" src="@/assets/happy_emoji.svg" width="125" height="125" />
+                    <p class="text-center text-xl font-bold">Heureux</p>
+                </div>
+
+                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
+                    <img alt="Ok" src="@/assets/normal_emoji.svg" width="125" height="125" />
+                    <p class="text-center text-xl font-bold">Ok</p>
+                </div>
+
+                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
+                    <img alt="Morose" src="@/assets/morose_emoji.svg" width="125" height="125" />
+                    <p class="text-center text-xl font-bold">Morose</p>
+                </div>
+
+                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
+                    <img alt="Malade" src="@/assets/seek_emoji.svg" width="125" height="125" />
+                    <p class="text-center text-xl font-bold">Malade</p>
+                </div>
+
+                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
+                    <img alt="Enervé" src="@/assets/angry_emoji.svg" width="125" height="125" />
+                    <p class="text-center text-xl font-bold">Enervé</p>
+                </div>
+
+                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
+                    <img alt="Triste" src="@/assets/sad_emoji.svg" width="125" height="125" />
+                    <p class="text-center text-xl font-bold">Triste</p>
+                </div>
+            </div>
         </div>
+<<<<<<< HEAD
 
         <div class="flex flex-col flex-none w-full h-full items-center justify-center">
             <img alt="Ok" src="@/assets/normal_emoji.svg" width="125" height="125" />
@@ -101,6 +128,9 @@ export default {
 
 
         <button ref="nextBtn" class="text-black font-bold rounded">
+=======
+        <button ref="nextBtn" class="text-black font-bold py-2 px-4 rounded">
+>>>>>>> ImplementationMood
             <img alt="right_arrow" src="@/assets/right_arrow.svg" width="30" height="30" />
         </button>
     </div>
