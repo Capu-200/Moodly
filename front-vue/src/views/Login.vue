@@ -14,10 +14,15 @@ methods: {
           identifier: this.email,
           password: this.password,
         });
+        const userRole = response.data.user.Roles
 
-        console.log('User profile', response.data.user.Roles);
-        console.log('User token', response.data.jwt);
-        this.$router.push({ name: 'mood' })
+        if (userRole === 'Manager') {
+          this.$router.push('/Test');
+        } else if (userRole === 'Employé') {
+          this.$router.push('/Mood');
+        } else {
+          console.error('Rôle d\'utilisateur inattendu');
+        }
       } catch (error) {
         console.log('An error occurred:', error.response);
       }
