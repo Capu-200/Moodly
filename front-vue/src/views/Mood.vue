@@ -59,26 +59,41 @@ export default {
             const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
             console.log(date);
         },
-        postChoix(){
-            axios
-            .post('http://localhost:1337/api/choixes', {
+        async postChoix(){
+          try {
+            const response = await axios.post('http://localhost:1337/api/choixes', {
                 headers: {
-                Authorization: `Bearer ${token}`,
+                  Authorization: `Bearer ${token}`,
                 },
-                data: {
-                    Date: this.getDate(),
-                    mood: this.getCurrentMoodId(),
-                },
-            })
-            .then(response => {
-                // Handle success.
-                console.log('Data: ', response.data);
-                console.log('Mood envoyé avec succès');
-            })
-            .catch(error => {
-                // Handle error.
-                console.log('An error occurred:', error.response);
-            });
+              },
+              {
+                Date: this.getDate(),
+                mood: this.getCurrentMoodId(),
+              });
+            console.log('Data: ', response.data);
+            console.log('Mood envoyé avec succès');
+          } catch (error) {
+            console.log('An error occurred:', error.response);
+          }
+          // axios
+          //   .post('http://localhost:1337/api/choixes', {
+          //       headers: {
+          //       Authorization: `Bearer ${token}`,
+          //       },
+          //       data: {
+          //           Date: this.getDate(),
+          //           mood: this.getCurrentMoodId(),
+          //       },
+          //   })
+          //   .then(response => {
+          //       // Handle success.
+          //       console.log('Data: ', response.data);
+          //       console.log('Mood envoyé avec succès');
+          //   })
+          //   .catch(error => {
+          //       // Handle error.
+          //       console.log('An error occurred:', error.response);
+          //   });
         },
     },
     mounted() {
@@ -129,7 +144,7 @@ export default {
     </div>
 
     <div>
-      <button v-on:click=this.postChoix() class="flex w-full justify-center rounded-md bg-rose-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">Valider</button>
+      <button @click=postChoix class="flex w-full justify-center rounded-md bg-rose-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">Valider</button>
     </div>
   </div>
 </template>
