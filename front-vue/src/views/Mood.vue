@@ -58,26 +58,45 @@ export default {
             const today = new Date();
             const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
             console.log(date);
+            console.log(typeof(date));
         },
         async postChoix(){
+          // try {
+          //   const response = await axios.post('http://localhost:1337/api/choixes', {
+          //       headers: {
+          //         Authorization: `Bearer ${token}`,
+          //       },
+          //     },
+          //     {
+          //       Date: this.getDate(),
+          //       mood: this.getCurrentMoodId(),
+          //     });
+          //   console.log('Data: ', response.data);
+          //   console.log('Mood envoyé avec succès');
+          // } catch (error) {
+          //   console.log('An error occurred:', error.response);
+          // }
+
           try {
             const response = await axios.post('http://localhost:1337/api/choixes', {
                 headers: {
+                  // 'Content-Type': 'application/json',
                   Authorization: `Bearer ${token}`,
                 },
-              },
-              {
-                Date: this.getDate(),
-                mood: this.getCurrentMoodId(),
-              });
+                data: {
+                    Date: this.getDate(),
+                    mood: this.getCurrentMoodId(),
+                },
+            });
             console.log('Data: ', response.data);
             console.log('Mood envoyé avec succès');
           } catch (error) {
             console.log('An error occurred:', error.response);
           }
+          
           // axios
           //   .post('http://localhost:1337/api/choixes', {
-          //       headers: {
+          //       headers: {'Content-Type': 'application/json',
           //       Authorization: `Bearer ${token}`,
           //       },
           //       data: {
@@ -93,6 +112,29 @@ export default {
           //   .catch(error => {
           //       // Handle error.
           //       console.log('An error occurred:', error.response);
+          //   });
+
+
+          // axios({
+          //   method: 'POST',
+          //   url: 'http://localhost:1337/api/choixes',
+          //   headers: {
+          //     'Content-Type': 'application/json',
+          //     Authorization: `Bearer ${token}`,
+          //   },
+          //   data: {
+          //     'Date': this.getDate(),
+          //     'mood': this.getCurrentMoodId(),
+          //   },
+          // })
+          //   .then(response => {
+          //     // Handle success.
+          //     console.log('Data: ', response.data);
+          //     console.log('Mood envoyé avec succès');
+          //   })
+          //   .catch(error => {
+          //     // Handle error.
+          //     console.log('An error occurred:', error.response);
           //   });
         },
     },
@@ -132,7 +174,13 @@ export default {
           <div ref="emojiCarousel" class="overflow-hidden w-full h-full flex items-center justify-center">
             <div class="flex transition-transform ease-linear duration-500" ref="carouselContainer">
               <div v-for="item in this.mood" :key="item.attributes" class="flex flex-col flex-none w-full h-full items-center justify-center">
-                <img :alt="item.attributes.Nom" :src="'@/assets/'+item.attributes.Emoji.data.attributes.name" width="125" height="125" />
+                <img v-if="item.attributes.Nom === 'Énervé'" :alt="item.attributes.Nom" src="@/assets/angry_emoji.svg" width="125" height="125" />
+                <img v-else-if="item.attributes.Nom === 'Triste'" :alt="item.attributes.Nom" src="@/assets/sad_emoji.svg" width="125" height="125" />
+                <img v-else-if="item.attributes.Nom === 'Joyeux'" :alt="item.attributes.Nom" src="@/assets/happy_emoji.svg" width="125" height="125" />
+                <img v-else-if="item.attributes.Nom === 'Malade'" :alt="item.attributes.Nom" src="@/assets/seek_emoji.svg" width="125" height="125" />
+                <img v-else-if="item.attributes.Nom === 'Morose'" :alt="item.attributes.Nom" src="@/assets/morose_emoji.svg" width="125" height="125" />
+                <img v-else :alt="item.attributes.Nom" src="@/assets/normal_emoji.svg" width="125" height="125" />
+                <!-- <img :alt="item.attributes.Nom" :src="'@/assets/'+item.attributes.Emoji.data.attributes.name" width="125" height="125" /> -->
                 <p :id="item.id" class="text-center text-xl font-bold">{{item.attributes.Nom}}</p>
               </div>
             </div>
