@@ -99,20 +99,22 @@ export default {
 </script>
 
 <template>
-    <div class="flex items-center justify-center">
-        <button ref="prevBtn" class="text-black font-bold rounded">
-            <img alt="left_arrow" src="@/assets/left_arrow.svg" width="30" height="30" />
-        </button>
-        <div ref="emojiCarousel" class="overflow-hidden w-full h-full flex items-center justify-center">
-            <div class="flex transition-transform ease-linear duration-500" ref="carouselContainer">
-                <div v-for="item in this.mood" :key="item.attributes" class="flex flex-col flex-none w-full h-full items-center justify-center">
-                    <img :alt="item.attributes.Nom" :src="'@/assets/'+item.attributes.Emoji.data.attributes.name" width="125" height="125" />
-                    <p :id="item.id" class="text-center text-xl font-bold">{{item.attributes.Nom}}</p>
+    <div class="flex flex-1 flex-col pb-24 justify-between gap-20">
+        <div class="flex items-center justify-center">
+            <button ref="prevBtn" class="text-black font-bold rounded">
+                <img alt="left_arrow" src="@/assets/left_arrow.svg" width="30" height="30" />
+            </button>
+            <div ref="emojiCarousel" class="overflow-hidden w-full h-full flex items-center justify-center">
+                <div class="flex transition-transform ease-linear duration-500" ref="carouselContainer">
+                    <div v-for="item in this.mood" :key="item.attributes" class="flex flex-col flex-none w-full h-full items-center justify-center">
+                        <img :alt="item.attributes.Nom" :src="'@/assets/'+item.attributes.Emoji.data.attributes.name" width="125" height="125" />
+                        <p :id="item.id" class="text-center text-xl font-bold">{{item.attributes.Nom}}</p>
+                    </div>
                 </div>
             </div>
+            <button ref="nextBtn" class="text-black font-bold rounded">
+                <img alt="right_arrow" src="@/assets/right_arrow.svg" width="30" height="30" />
+            </button>
         </div>
-        <button ref="nextBtn" class="text-black font-bold rounded">
-            <img alt="right_arrow" src="@/assets/right_arrow.svg" width="30" height="30" />
-        </button>
     </div>
 </template>
