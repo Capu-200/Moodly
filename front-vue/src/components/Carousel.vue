@@ -8,7 +8,6 @@ export default {
         return {
             currentEmojiIndex: 0,
             mood: [],
-            emoji: [],
         };
     },
     methods: {
@@ -16,13 +15,21 @@ export default {
             const offset = -100 * this.currentEmojiIndex;
             this.$refs.carouselContainer.style.transform = `translateX(${offset}%)`;
             this.displayCurrentMood();
+            this.getCurrentMoodId();
         },
         displayCurrentMood() {
-            // Assurez-vous que le carrousel a des enfants et que l'index est valide
             if (this.$refs.carouselContainer.children.length > 0 && this.currentEmojiIndex < this.$refs.carouselContainer.children.length) {
                 const currentMoodElement = this.$refs.carouselContainer.children[this.currentEmojiIndex];
                 const currentMoodText = currentMoodElement.querySelector('p').textContent;
                 console.log('Humeur actuelle:', currentMoodText);
+            }
+        },
+        getCurrentMoodId() {
+            if (this.$refs.carouselContainer.children.length > 0 && this.currentEmojiIndex < this.$refs.carouselContainer.children.length) {
+                const currentMoodElement = this.$refs.carouselContainer.children[this.currentEmojiIndex];
+                const currentMoodId = currentMoodElement.querySelector('p').id;
+                console.log('Id du mood display:', currentMoodId);
+                return currentMoodId;
             }
         },
         dataMood(){
@@ -42,7 +49,33 @@ export default {
                 // Handle error.
                 console.log('An error occurred:', error.response);
             });
-        }
+        },
+        getDate(){
+            const today = new Date();
+            const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            console.log(date);
+        },
+        postChoix(){
+            axios
+            .post('http://localhost:1337/api/choix', {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                },
+                data: {
+                    Date: getDate(),
+                    mood: this.getCurrentMoodId(),
+                },
+            })
+            .then(response => {
+                // Handle success.
+                console.log('Data: ', response.data);
+                console.log('Mood envoyé avec succès');
+            })
+            .catch(error => {
+                // Handle error.
+                console.log('An error occurred:', error.response);
+            });
+        },
     },
     mounted() {
         this.$refs.prevBtn.addEventListener('click', () => {
@@ -59,6 +92,8 @@ export default {
     },
     beforeMount() {
         this.dataMood();  
+        this.getDate();
+        // this.getCurrentMoodId();
     },
 };
 </script>
@@ -74,36 +109,6 @@ export default {
                     <img :alt="item.attributes.Nom" :src="'@/assets/'+item.attributes.Emoji.data.attributes.name" width="125" height="125" />
                     <p :id="item.id" class="text-center text-xl font-bold">{{item.attributes.Nom}}</p>
                 </div>
-
-                <!-- <div class="flex flex-col flex-none w-full h-full items-center justify-center">
-                    <img alt="Heureux" src="@/assets/happy_emoji.svg" width="125" height="125" />
-                    <p class="text-center text-xl font-bold">Heureux</p>
-                </div> -->
-<!-- 
-                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
-                    <img alt="Ok" src="@/assets/normal_emoji.svg" width="125" height="125" />
-                    <p class="text-center text-xl font-bold">Ok</p>
-                </div>
-
-                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
-                    <img alt="Morose" src="@/assets/morose_emoji.svg" width="125" height="125" />
-                    <p class="text-center text-xl font-bold">Morose</p>
-                </div> -->
-
-                <!-- <div class="flex flex-col flex-none w-full h-full items-center justify-center">
-                    <img alt="Malade" src="@/assets/seek_emoji.svg" width="125" height="125" />
-                    <p class="text-center text-xl font-bold">Malade</p>
-                </div>
-
-                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
-                    <img alt="Enervé" src="@/assets/angry_emoji.svg" width="125" height="125" />
-                    <p class="text-center text-xl font-bold">Enervé</p>
-                </div>
-
-                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
-                    <img alt="Triste" src="@/assets/sad_emoji.svg" width="125" height="125" />
-                    <p class="text-center text-xl font-bold">Triste</p>
-                </div> -->
             </div>
         </div>
         <button ref="nextBtn" class="text-black font-bold rounded">
