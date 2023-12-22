@@ -9,11 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "highcharts": "^11.2.0",
-=======
     "axios": "^1.6.2",
->>>>>>> 82c836fb8e61ff6e89ab89cc7b09e2f61aed27e3
     "vue": "^3.3.11",
     "vue-highcharts": "^0.2.0",
     "vue-router": "^4.2.5"
