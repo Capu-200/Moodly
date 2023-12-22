@@ -5,7 +5,7 @@ import carousel  from '../components/Carousel.vue'
 <script>
 import axios from 'axios';
 
-const token = '5cb7857127429627d59e735594d07ee35651e94cd950b75289714c650af667fade52a57f7a7cde758db8a0db03d9b288428481fe66fce08a3c28e5e2161643539c974cd11862af8d66f95f54b6837ab485128f90857b114d7e21c6fee148de22cf6600131d2a66710ab753883536bcf222c4cd15682488bcca0e7c978a01ffc2';
+const token = '9e24ba9686ab215cf8c97f400b47ea4fbe0af2308070435df2e0cde35ae27c492d3cb451468b0c497148835f4cd4892d261f2204ebf4c5cddb8da530de7258f0cc95ce0c3522f43d4cf10bad125229981cb216573edeaabaf2092bfc755192b6c76e371a05e2e58ae652d41970152fc23af2b85f76494cd9114b6608c454750c';
 
 export default {
     data() {
@@ -80,7 +80,7 @@ export default {
           try {
             const response = await axios.post('http://localhost:1337/api/choixes', {
                 headers: {
-                  // 'Content-Type': 'application/json',
+                  'Content-Type': 'application/json',
                   Authorization: `Bearer ${token}`,
                 },
                 data: {
