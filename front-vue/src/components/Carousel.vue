@@ -7,6 +7,8 @@ export default {
     data() {
         return {
             currentEmojiIndex: 0,
+            mood: [],
+            emoji: [],
         };
     },
     methods: {
@@ -22,6 +24,24 @@ export default {
                 const currentMoodText = currentMoodElement.querySelector('p').textContent;
                 console.log('Humeur actuelle:', currentMoodText);
             }
+        },
+        dataMood(){
+            axios
+            .get('http://localhost:1337/api/moods?populate=*', {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                },
+            })
+            .then(response => {
+                // Handle success.
+                console.log('Data: ', response.data);
+                this.mood = response.data.data;
+                console.log('Moods: ', this.mood);
+            })
+            .catch(error => {
+                // Handle error.
+                console.log('An error occurred:', error.response);
+            });
         }
     },
     mounted() {
@@ -36,23 +56,10 @@ export default {
             this.currentEmojiIndex = (this.currentEmojiIndex + 1) % totalEmojis;
             this.updateCarousel();
         });
-
-        // Request API.
-        axios
-        .get('http://localhost:1337/api/moods', {
-            headers: {
-            Authorization: `Bearer ${token}`,
-            },
-        })
-        .then(response => {
-            // Handle success.
-            console.log('Data: ', response.data);
-        })
-        .catch(error => {
-            // Handle error.
-            console.log('An error occurred:', error.response);
-        });
-    }
+    },
+    beforeMount() {
+        this.dataMood();  
+    },
 };
 </script>
 
@@ -63,12 +70,16 @@ export default {
         </button>
         <div ref="emojiCarousel" class="overflow-hidden w-full h-full flex items-center justify-center">
             <div class="flex transition-transform ease-linear duration-500" ref="carouselContainer">
-
-                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
-                    <img alt="Heureux" src="@/assets/happy_emoji.svg" width="125" height="125" />
-                    <p class="text-center text-xl font-bold">Heureux</p>
+                <div v-for="item in this.mood" :key="item.attributes" class="flex flex-col flex-none w-full h-full items-center justify-center">
+                    <img :alt="item.attributes.Nom" :src="'@/assets/'+item.attributes.Emoji.data.attributes.name" width="125" height="125" />
+                    <p :id="item.id" class="text-center text-xl font-bold">{{item.attributes.Nom}}</p>
                 </div>
 
+                <!-- <div class="flex flex-col flex-none w-full h-full items-center justify-center">
+                    <img alt="Heureux" src="@/assets/happy_emoji.svg" width="125" height="125" />
+                    <p class="text-center text-xl font-bold">Heureux</p>
+                </div> -->
+<!-- 
                 <div class="flex flex-col flex-none w-full h-full items-center justify-center">
                     <img alt="Ok" src="@/assets/normal_emoji.svg" width="125" height="125" />
                     <p class="text-center text-xl font-bold">Ok</p>
@@ -77,9 +88,9 @@ export default {
                 <div class="flex flex-col flex-none w-full h-full items-center justify-center">
                     <img alt="Morose" src="@/assets/morose_emoji.svg" width="125" height="125" />
                     <p class="text-center text-xl font-bold">Morose</p>
-                </div>
+                </div> -->
 
-                <div class="flex flex-col flex-none w-full h-full items-center justify-center">
+                <!-- <div class="flex flex-col flex-none w-full h-full items-center justify-center">
                     <img alt="Malade" src="@/assets/seek_emoji.svg" width="125" height="125" />
                     <p class="text-center text-xl font-bold">Malade</p>
                 </div>
@@ -92,7 +103,7 @@ export default {
                 <div class="flex flex-col flex-none w-full h-full items-center justify-center">
                     <img alt="Triste" src="@/assets/sad_emoji.svg" width="125" height="125" />
                     <p class="text-center text-xl font-bold">Triste</p>
-                </div>
+                </div> -->
             </div>
         </div>
         <button ref="nextBtn" class="text-black font-bold rounded">
